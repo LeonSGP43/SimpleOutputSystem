@@ -1,0 +1,11 @@
+services:
+  output-service:
+    build: .
+    container_name: output-service
+    ports:
+      - "51000:51000"
+    env_file:
+      - .env  # 加载本地环境变量
+    volumes:
+      - ./logs:/app/logs  # 日志目录挂载（本地可查看）
+    restart: always  # 容器异常自动重启

@@ -2,6 +2,7 @@
 flask==2.3.3
 python-dotenv==1.0.0
 python-json-logger==2.0.7
+gunicorn==21.2.0
 
 # 开发依赖（代码规范+测试）
 pre-commit==3.5.0

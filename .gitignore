@@ -1,0 +1,23 @@
+# Python相关
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+venv/
+dist/
+build/
+
+# Docker相关
+.dockerignore
+*.dockerignore
+docker-compose.override.yml
+
+# 测试相关
+.coverage
+htmlcov/
+tests/__pycache__/
+
+# 日志相关
+logs/
+*.log

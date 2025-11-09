@@ -1,0 +1,17 @@
+repos:
+  # 代码格式化（black）
+  - repo: https://github.com/psf/black
+    rev: 24.2.0
+    hooks:
+      - id: black
+        language_version: python3.9
+  # 代码语法检查（flake8）
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+  # 自动排序import（可选，规范导入）
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort

@@ -76,8 +76,8 @@ jobs:
         run: |
           # 连接ECS，执行部署命令
           ssh -o StrictHostKeyChecking=no \
-            -o ServerAliveInterval=30 \  # 每30秒发一次心跳包
-            -o ServerAliveCountMax=10 \  # 10次心跳无响应才断开（容错性更高）
+            -o ServerAliveInterval=30 \ 
+            -o ServerAliveCountMax=10 \ 
             root@${{ secrets.ECS_IP }} << 'EOF'
             # 1. 服务器登录GHCR（解决拉取权限问题）
             docker login ghcr.io -u leonsgp43 -p ${{ secrets.GHCR_PAT }}
@@ -94,7 +94,7 @@ jobs:
               -p 51000:51000 \
               -e FLASK_ENV=production \
               -e SECRET_KEY=${{ secrets.PROD_SECRET_KEY }} \
-              -e LOG_LEVEL=INFO \\
+              -e LOG_LEVEL=INFO \
               -v /root/output-service/logs:/app/logs \
               --restart always \
               ghcr.io/leonsgp43/output-service:latest

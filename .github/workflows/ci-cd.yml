@@ -76,10 +76,7 @@ jobs:
         run: |
           # 连接ECS，执行部署命令
           echo "ECS_IP: ${{ secrets.ECS_IP }}"
-          ssh -o StrictHostKeyChecking=no \
-            -o ServerAliveInterval=30 \ 
-            -o ServerAliveCountMax=10 \ 
-            root@${{ secrets.ECS_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.ECS_IP }} << 'EOF'
             # 1. 服务器登录GHCR（解决拉取权限问题）
             docker login ghcr.io -u leonsgp43 -p ${{ secrets.GHCR_PAT }}
             # 拉取最新镜像（GitHub Container Registry）

@@ -75,6 +75,7 @@ jobs:
       - name: Deploy to Aliyun ECS
         run: |
           # 连接ECS，执行部署命令
+          echo "ECS_IP: ${{ secrets.ECS_IP }}"
           ssh -o StrictHostKeyChecking=no \
             -o ServerAliveInterval=30 \ 
             -o ServerAliveCountMax=10 \ 

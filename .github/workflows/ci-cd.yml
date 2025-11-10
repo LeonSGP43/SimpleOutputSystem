@@ -75,7 +75,10 @@ jobs:
       - name: Deploy to Aliyun ECS
         run: |
           # 连接ECS，执行部署命令
-          ssh -o StrictHostKeyChecking=no root@${{ secrets.ECS_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no \
+            -o ServerAliveInterval=30 \  # 每30秒发一次心跳包
+            -o ServerAliveCountMax=10 \  # 10次心跳无响应才断开（容错性更高）
+            root@${{ secrets.ECS_IP }} << 'EOF'
             # 1. 服务器登录GHCR（解决拉取权限问题）
             docker login ghcr.io -u leonsgp43 -p ${{ secrets.GHCR_PAT }}
             # 拉取最新镜像（GitHub Container Registry）

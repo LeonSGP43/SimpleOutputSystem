@@ -76,6 +76,8 @@ jobs:
         run: |
           # 连接ECS，执行部署命令
           ssh -o StrictHostKeyChecking=no root@${{ secrets.ECS_IP }} << 'EOF'
+            # 1. 服务器登录GHCR（解决拉取权限问题）
+            docker login ghcr.io -u leonsgp43 -p ${{ secrets.GHCR_PAT }}
             # 拉取最新镜像（GitHub Container Registry）
             docker pull ghcr.io/leonsgp43/output-service:latest
 
@@ -84,14 +86,14 @@ jobs:
             docker rm output-service || true
 
             # 启动新容器（使用生产环境变量）
-            docker run -d \\
-              --name output-service \\
-              -p 51000:51000 \\
-              -e FLASK_ENV=production \\
-              -e SECRET_KEY=${{ secrets.PROD_SECRET_KEY }} \\
+            docker run -d \
+              --name output-service \
+              -p 51000:51000 \
+              -e FLASK_ENV=production \
+              -e SECRET_KEY=${{ secrets.PROD_SECRET_KEY }} \
               -e LOG_LEVEL=INFO \\
-              -v /root/output-service/logs:/app/logs \\
-              --restart always \\
+              -v /root/output-service/logs:/app/logs \
+              --restart always \
               ghcr.io/leonsgp43/output-service:latest
 
             # 清理旧镜像（避免磁盘占用）

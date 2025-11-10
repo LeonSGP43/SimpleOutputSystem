@@ -53,7 +53,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/output-service:latest  # 镜像标签
+          tags: ghcr.io/${{ format('ghcr.io/{0}/output-service:latest', lower(github.repository_owner))  }} # 镜像标签
 
   # 作业2：CD（部署到阿里云ECS）
   cd:
